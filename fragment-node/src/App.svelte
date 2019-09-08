@@ -11,7 +11,7 @@
 
 <Container {theme}>
   <Label {theme}>fragment</Label>
-  <Headline {theme}>Hello beautiful people!</Headline>
+  <Headline {theme}>Hello svelte people!</Headline>
   <h2>
     Count:
     <strong>{counter}</strong>
