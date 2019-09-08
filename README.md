@@ -14,4 +14,4 @@ Start a local server with
 docker-compose up
 ````
 
-and go to [http://localhost:3001](http://localhost:3001)
+and go to [http://localhost:3000](http://localhost:3000)
