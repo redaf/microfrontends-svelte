@@ -1,31 +1,30 @@
 <script>
   import { onMount } from "svelte";
 
-  let Component = null;
-
   export let loadManifest;
   export let prefix;
 
   export let props;
 
-  onMount(async () => {
-    if (!Component) {
-      return loadManifest().then(manifest => {
-        const { name, js } = manifest;
-
-        const script = document.createElement("script");
-        script.src = `${prefix}${js}`;
-        script.type = "text/javascript";
-        script.onload = () => {
-          Component = window[name];
-        };
-
-        document.body.appendChild(script);
-      });
-    }
+  let componentLoader = loadManifest().then(manifest => {
+    const { name, js } = manifest;
+    const script = document.createElement("script");
+    script.src = `${prefix}${js}`;
+    script.type = "text/javascript";
+    const component = new Promise((resolve, reject) => {
+      script.onload = () => {
+        resolve(window[name]);
+      };
+    });
+    document.body.appendChild(script);
+    return component;
   });
 </script>
 
-{#if Component}
-  <svelte:component this={Component} {...props} />
-{/if}
+{#await componentLoader}
+  <p>Loading</p>
+{:then comp}
+  <svelte:component this={comp} {...props} />
+{:catch error}
+  <p>{error}</p>
+{/await}
