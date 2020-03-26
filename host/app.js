@@ -4,10 +4,18 @@ const path = require('path')
 
 const app = express()
 
+const name = 'Host'
 const port = 80
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(morgan('combined'))
-app.listen(port)
+const server = app.listen(port, _ => {
+  console.log(`${name} app listening on ${port}`)
+})
 
-console.log(`Host app listening on ${port}`)
+process.on('SIGTERM', _ => {
+  console.log(`Closing ${name} app`)
+  server.close(_ => {
+    process.exit(0)
+  })
+})
