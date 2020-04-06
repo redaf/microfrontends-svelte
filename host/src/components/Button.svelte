@@ -1,10 +1,7 @@
 <script>
-  import emotion from "emotion/dist/emotion.umd.min.js";
-  const { css } = emotion;
-
   export let theme;
 
-  $: cls = css`
+  $: style = `
     background-color: ${theme.colors.body};
     color: ${theme.colors.text};
     border: 1px solid ${theme.colors.text};
@@ -18,6 +15,6 @@
   `;
 </script>
 
-<button class={cls} on:click>
+<button {style} on:click>
   <slot />
 </button>
