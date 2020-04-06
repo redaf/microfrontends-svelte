@@ -1,14 +1,11 @@
 <script>
-  import emotion from "emotion/dist/emotion.umd.min.js";
-  const { css } = emotion;
-
   export let theme;
 
-  $: cls = css`
+  $: style = `
     color: ${theme.colors.highlight};
   `;
 </script>
 
-<h1 class={cls}>
+<h1 {style}>
   <slot />
 </h1>
