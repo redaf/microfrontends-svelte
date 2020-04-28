@@ -1,5 +1,5 @@
 <script>
-  import asyncComponent from "./asyncComponent.js";
+  import AsyncComponent from "./AsyncComponent.svelte";
 
   import Badge from "./components/Badge.svelte";
   import Button from "./components/Button.svelte";
@@ -23,11 +23,9 @@
     theme = th;
   }
 
-  const MyFragment = asyncComponent({
-    prefix: "/fragments/node",
-    loadManifest: () =>
-      fetch("/fragments/node/manifest.json").then(res => res.json())
-  });
+  const prefix = "/fragments/node";
+  const loadManifest = () =>
+    fetch(`${prefix}/manifest.json`).then(res => res.json());
 </script>
 
 <Container {theme}>
@@ -46,7 +44,11 @@
       on:setDarkTheme={() => setTheme(dark)} />
   </Nav>
   <Main>
-    <MyFragment
-      props={{ theme, counter, onIncrementCounter: incrementCounter }} />
+    <AsyncComponent
+      {prefix}
+      {loadManifest}
+      {theme}
+      {counter}
+      onIncrementCounter={incrementCounter} />
   </Main>
 </Container>

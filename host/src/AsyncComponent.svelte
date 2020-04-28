@@ -1,10 +1,6 @@
 <script>
-  import { onMount } from "svelte";
-
   export let loadManifest;
   export let prefix;
-
-  export let props;
 
   let componentLoader = loadManifest().then(manifest => {
     const { name, js } = manifest;
@@ -24,7 +20,7 @@
 {#await componentLoader}
   <p>Loading</p>
 {:then comp}
-  <svelte:component this={comp} {...props} />
+  <svelte:component this={comp} {...$$props} />
 {:catch error}
   <p>{error}</p>
 {/await}
