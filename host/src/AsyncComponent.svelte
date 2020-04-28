@@ -27,7 +27,7 @@
 {#await componentLoader}
   <p>Loading</p>
 {:then comp}
-  <svelte:component this={comp} {...$$props} />
+  <svelte:component this={comp} {...$$restProps} />
 {:catch error}
   <p>{error}</p>
 {/await}
