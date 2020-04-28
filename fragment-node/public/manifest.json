@@ -1,4 +1,5 @@
 {
     "name": "fragment",
-    "js": "/bundle.js"
+    "js": "/bundle.js",
+    "css": "/bundle.css"
 }
