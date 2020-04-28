@@ -6,13 +6,16 @@
     border: ${theme.border.width}px dashed ${theme.colors.text};
     padding: ${theme.spacing.unit * 3}px;
     margin-right: ${theme.spacing.unit * 3}px;
-    a, a:hover, a:visited {
-      color: ${theme.colors.highlight};
-    }
+    --a-color: ${theme.colors.highlight};
   `;
 </script>
 
 <style>
+  nav :global(a),
+  nav :global(a:hover),
+  nav :global(a:visited) {
+    color: var(--a-color);
+  }
   nav {
     width: 33%;
   }
